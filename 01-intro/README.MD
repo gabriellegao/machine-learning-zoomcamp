@@ -214,4 +214,4 @@ Formula: $\mathbf{Matrix U * Matrix U^{-1} = I}$
 
 ## Pandas
 ### Notebook
-[Introduction to Pandas](pandas.ipynb)
+[Pandas Notebook](pandas.ipynb)
