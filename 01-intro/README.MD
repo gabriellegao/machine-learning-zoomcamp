@@ -207,7 +207,13 @@ $
 $  
 
 ### Matrix Inverse
-Formula: $\mathbf{Matrix U * Matrix U^{-1} = I}$  
+The requirement of a matrix $A (m \times n)$ has inverse matrix $A^{-1}$:  
+1. m = n
+2. rank(A) = min(m,n)
+3. 行列式不为零  
+   
+####  Formula  
+$\mathbf{Matrix U * Matrix U^{-1} = I}$  
 
 ### Notebook
 [Linear Algebra and Matrix Notebook](linear_algebra.ipynb)
