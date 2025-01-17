@@ -133,8 +133,37 @@ Category A -> [1, 0, 0]
 Category B -> [0, 1, 0]  
 Category C -> [0, 0, 1]
 
-### Notebook
+### Regularization
+The root cause of having extremely large weights is noise in dataset. One situation would be some rows or coloumns in a matrix are 99% similar (e.g. 1.00001 and 1). This matrix looks like a Singular Matrix but still invertible, and the weight caculated based on this matrix is unreasonaly hight.   
+To solve this issue, one alternative is adding a small decimal to the diagonal of the feature matrix. One rule of this small decimal is the larger the small decimal, the smaller the weights. 
 
+$
+\begin{bmatrix}
+    1 & 1.0001 & 2.001 \\
+    2.001 & 1 & 1.00001 \\
+    1 & 2 & 1
+\end{bmatrix}
+\ + 
+\begin{bmatrix}
+    0.01 & 0 & 0 \\
+    0 & 0.01 & 0 \\
+    0 & 0 & 0.01
+\end{bmatrix}
+=>
+\begin{bmatrix}
+    1.01 & 1.0001 & 2.001 \\
+    2.001 & 1.01 & 1.00001 \\
+    1 & 2 & 1.01
+\end{bmatrix}
+$
+
+### Mode Tuning
+Find the best regularization parameter (small decimal) by applying it into validation dataset. 
+
+### Use Model
+After finding the best model and regularization parameter, we train the model again using training dataset and validation dataset, and calculate predicted values and RMSE using test dataset.
+### Notebook
+[Car Price Model Notebook](car_price.ipynb)
 
 ## Additional Notes
 ### Pandas Series
@@ -192,5 +221,7 @@ The requirement of a matrix $X (m \times n)$ has inverse matrix $X^{-1}$:
 2. rank(X) = min(m,n)
 3. 行列式不为零  
 ### Matrix Transpose
-如果$X (6 \times 3)$, 他的逆转版为$X^{-1} (3 \times 6)$, $X \times X^{-1}(6 \times 6)$则是singular matrix.  
-因为要求$rank(X)$和$rank(X)<=min(6,3)$, 因此$rank(X \times X^{-1}) <= min(6,3)$, 而$X \times X^{-1}$是一个$6 \times 6$的matrix, 远超过$3$.
+如果$X (6 \times 3)$, 他的逆转版为$X^{-1} (3 \times 6)$, $X \times X^{-1}(6 \times 6)$则是Singular Matrix.  
+因为要求$rank(X)$和$rank(X)<=min(6,3)$, 因此$rank(X \times X^{-1}) <= min(6,3)$, 而$X \times X^{-1}$是一个$6 \times 6$的matrix, 远超过$3$.  
+Singular Matrix 还有一种情况是linearly dependent rows or columns. 这个的意思是, 这个Matrix里的rows之间或者columns之间, 存在相似性.  
+Singular Matrix cannot be inverted.
