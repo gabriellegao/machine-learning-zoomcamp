@@ -47,12 +47,10 @@ $
 #### Upgraded Formula
 The upgraded fromula adds 1 to each record $x_{i}^T$   
 
-$
-\mathbf{g(x_{i}) = W_{0} \times 1+ x_{i}^T \times W = (1 +x_{i}^T) \times W}
-$    
+$\mathbf{g(x_{i}) = W_{0} \times 1+ x_{i}^T \times W = (1 +x_{i}^T) \times W}$  
 
-$
-\mathbf{X} =
+
+$\mathbf{X} =
 \begin{bmatrix}
     1+x_{1}^{T} \\
     1+ x_{2}^{T} \\
@@ -65,28 +63,24 @@ $
     1 & x_{21} & x_{22} & \dots  & x_{2d} \\
     \vdots & \vdots & \ddots & \vdots \\
     1 & x_{n1} & x_{n2} & \dots  & x_{nd}
-\end{bmatrix}
-$
+\end{bmatrix}$
 $\quad$
-$
-\mathbf{W} =
+$\mathbf{W} =
 \begin{bmatrix}
     w_{0} \\
     w_{1} \\
     \vdots \\
     w_{n}
-\end{bmatrix}
-$
+\end{bmatrix}$
 
-$
-{g(X)} = {y} =
+
+${g(X)} = {y} =
 \begin{bmatrix}
     (1+x_{1}^{T}) \times W\\
     (1+x_{2}^{T}) \times W\\
     \vdots \\
     (1+x_{n}^{T}) \times W
-\end{bmatrix} = {X \times W}
-$
+\end{bmatrix} = {X \times W}$
 
 ### Training a Linear Regression Model
 $
