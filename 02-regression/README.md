@@ -56,9 +56,9 @@ $\mathbf{X} =
     1+ x_{2}^{T} \\
     \vdots \\
     1+x_{n}^{T}
-\end{bmatrix}
-\ =
-\begin{bmatrix}
+\end{bmatrix}$
+$\ =$
+$\begin{bmatrix}
     1 & x_{11} & x_{12} & \dots  & x_{1d} \\
     1 & x_{21} & x_{22} & \dots  & x_{2d} \\
     \vdots & \vdots & \ddots & \vdots \\
