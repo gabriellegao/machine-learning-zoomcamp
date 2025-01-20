@@ -9,6 +9,7 @@
 - `df.columns.str.replace(' ', '_')` -> replace the space separator  
 - `df.dtypes` -> retrieve data types of all features  
 - `df.index` -> retrieve indices of a dataframe  
+- `df.astype(int)` -> convert original data type to integer
 ### Exploratory Data Analysis
 #### Math Numpy `log()`
 The numpy method `log()` is to narrow the data range (e.g. 1 to 10000 -> 1 to 5) and remain its data order. The purpose of applying `log()` is to avoid long-tail effect. 
@@ -37,8 +38,7 @@ In general, the dataset is splitted into three parts: training, validation, and 
 ### Linear Regression: Simple Version
 #### Basic Formula  
 $
-\mathbf{g(x_{i}) = w_{0} + w_{1}×x_{i1} + w_{2}×x_{i2} + w_{3}×x_{i3} = w_0 + \sum_{j=1}^3 x_{ij} \times W_j
-}
+g(x_{i}) = w_{0} + w_{1}×x_{i1} + w_{2}×x_{i2} + w_{3}×x_{i3} = w_0 + \sum_{j=1}^3 x_{ij} \times W_j
 $ 
 #### Numpy `log()` and `expm1()`
 `numpy.log()` and `numpy.exp()` are inversely related, the same as `log1p()` and `expm1()`
@@ -47,16 +47,17 @@ $
 #### Upgraded Formula
 The upgraded fromula adds 1 to each record $x_{i}^T$   
 
-$\mathbf{g(x_{i}) = W_{0} \times 1+ x_{i}^T \times W = (1 +x_{i}^T) \times W}$  
+$g(x_{i}) = w_{0} \times 1+ x_{i}^T \times W = (1 +x_{i}^T) \times W$  
 
-
-$\mathbf{X} =
+$
+X=
 \begin{bmatrix}
     1+x_{1}^{T} \\
     1+ x_{2}^{T} \\
     \vdots \\
     1+x_{n}^{T}
-\end{bmatrix}$
+\end{bmatrix}
+$
 $\ =$
 $\begin{bmatrix}
     1 & x_{11} & x_{12} & \dots  & x_{1d} \\
@@ -65,7 +66,7 @@ $\begin{bmatrix}
     1 & x_{n1} & x_{n2} & \dots  & x_{nd}
 \end{bmatrix}$
 $\quad$
-$\mathbf{W} =
+$W =
 \begin{bmatrix}
     w_{0} \\
     w_{1} \\
@@ -95,8 +96,9 @@ $
 W = (X^T \times X)^{-1} \times X^T \times y
 $
 
-*Attention*  
-*Add 1 to each record in Maxtrix $X$*
+***Attention***   
+***Add 1 to each record in Maxtrix $X$***
+
 ### Car Price Baseline Model
 Linear regression only applies to numerical varibales.  
 
@@ -151,19 +153,20 @@ $
 \end{bmatrix}
 $
 
-### Mode Tuning
+### Tuning Model
 Find the best regularization parameter (small decimal) by applying it into validation dataset. 
 
-### Use Model
+### Using Model
 After finding the best model and regularization parameter, we train the model again using training dataset and validation dataset, and calculate predicted values and RMSE using test dataset.
 ### Notebook
 [Car Price Model Notebook](car_price.ipynb)
 
 ## Additional Notes
 ### Pandas Series
-Series is similar to list, but it has some features that list doesn't have
+Series is similar to list, but it has some features that list doesn't have.
+- Types: Series can be a row or a column. 
 - Index: output of series is composed by pairs of inex and value, one-to-one match.
-- Vector: output of series is vertically aligned, containing two elements - index and values.
+- Vector: output of series can be vertically aligned, containing two elements - index and values.
 - Element-wise operations: supports `.sum()`, `.count()`, `mean()`.  
 
 ```python
