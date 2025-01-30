@@ -1,3 +1,11 @@
 .ipynb_checkpoints
 
 *.csv
+
+__MACOSX
+
+*.txt
+
+.Rhistory
+
+bank-additional/
