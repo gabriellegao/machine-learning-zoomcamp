@@ -1,10 +1,10 @@
-## Churn Projection Project
+# Classification: Churn Projection Project
 
-### Intro
+## Intro
 This project apply data to binary classification, and output liklihood as predicted values between 0 and 1.  
 $$g(x_{i})=y_{i}$$
 
-### Data Preparation
+## Data Preparation
 Commands, functions, and methods:
 - `!wget` -> Linux shell command for downloading data
 - `pd.read.csv()` -> read csv files
@@ -19,21 +19,21 @@ Commands, functions, and methods:
 - `df.fillna()` -> replace NAs with some value
 - `(df.x == "yes").astype(int)` -> convert x series of yes-no values to numerical values.
 
-### Setup Validation Framework
+## Setup Validation Framework
 Classes, functions, and methods:
 - `train_test_split` -> Scikit-Learn class for splitting a dataset into two parts. The test_size argument states how large the test set should be. The random_state argument sets a random seed for reproducibility purposes.
 - `df.reset_index(drop=True)` -> reset the indices of a dataframe and delete the previous ones.
 - `df.x.values` -> extract the values from x series.
 - `del df['x']` -> delete x series from a dataframe.
   
-### EDA
+## EDA
 Functions and methods:
 - `df.isnull().sum()` -> returns the number of null values in the dataframe.
 - `df.x.value_counts()` -> returns the number of values for each category in x series. The `normalize=True` argument retrieves the percentage of each category. In this project, the mean of churn is equal to the churn rate obtained with the value_counts method.
 - `round(x, y)` -> round an x number with y decimal places
 - `df[x].nunique()` -> returns the number of unique values in x series
 
-### Feature Importance: Churn Rate and Risk Ratio
+## Feature Importance: Churn Rate and Risk Ratio
 1. Churn rate
    Difference between global mean of the target variable and mean of the target variable for categories of a feature. If this difference is greater than 0, it means that the category is less likely to churn, and if the difference is lower than 0, the group is more likely to churn. The larger differences are indicators that a variable is more important than others.
 
@@ -45,15 +45,15 @@ Functions and methods:
 - `df.groupby('x').y.agg([mean()])` -> returns a dataframe with mean of y series grouped by x series
 - `display(x)` -> displays an output in the cell of a jupyter notebook.
 
-### Feature Importance: Mutal Information
+## Feature Importance: Mutal Information
 Mutual Information measures the "correlation" between categorical variables and target variables. The higher the score, the stronger the correlation.
 
 Classes, functions, and methods:
-- `mutual_info_score(x, y)` -> Scikit-Learn class for calculating the mutual information between the x target variable and y feature. This functions is more suitable for categorical variables and discretized numerical variables. 
-- `df[x].apply(y_func)` -> apply a y function to the x series of the df dataframe.This `apply()` method is similar as `map()` in RDD.  
+- `mutual_info_score(x, y)` -> Scikit-Learn class for calculating the mutual information between one x target variable and one y feature. This functions is more suitable for categorical variables and discretized numerical variables. 
+- `df[x].apply(y_func)` -> apply a y function to the x series of the df dataframe. This `apply()` method is similar as `map()` in RDD.  
 - `df.sort_values(ascending=False).to_frame(name='x')` -> sort values in an ascending order and called the column as x.
 
-### Feature Importance: Correlation
+## Feature Importance: Correlation
 Correlation coefficient measures the degree of dependency between two variables. This value is negative if one variable grows while the other decreases, and it is positive if both variables increase. Depending on its size, the dependency between both variables could be low, moderate, or strong. It allows measuring the importance of numerical variables.  
 
 If r is correlation coefficient, then the correlation between two variables is:  
@@ -72,7 +72,7 @@ Functions and methods:
 ***Attention***  
 ***Mutual Information and Correlation are two ways of measuring the importance of feature variables to target variables. Mutual information is suitable for categorical values and correlation is suitable for numerical values.***  
 
-### One-Hot Encoding
+## One-Hot Encoding
 One-Hot Encoding allows encoding categorical variables in numerical ones. This method represents each category of a variable as one column, and a 1 is assigned if the value belongs to the category or 0 otherwise.
 
 Classes, functions, and methods:
@@ -80,7 +80,7 @@ Classes, functions, and methods:
 - `DictVectorizer().fit_transform([x_dict])` -> Scikit-Learn class for one-hot encoding by converting a list of x dictionaries into a sparse matrix. It does not affect the numerical variables.
 - `DictVectorizer().get_feature_names_out()` -> return the names of the columns in the sparse matrix.
 
-### Logistics Regression: Concept
+## Logistics Regression: Concept
 There are two types of classification: binary and multi-class.  
 In general, supervised models can be represented with this formula:
 $$g(x_{i}) = y_{i}$$
@@ -92,7 +92,7 @@ $$z = w_{0} + w_{1}x_{1} + w_{2}x_{2} + ... + w_{n}x_{n}$$
 $$Sigmoid(z)=\frac{1}{1 + exp( -z )}$$
 In this way, the sigmoid function allows transforming a score ($z$) calculated from linear regression into a probability ($Sigmoid(z)$).
 
-### Train Logistics Regression with Scikit-Learn
+## Train Logistics Regression with Scikit-Learn
 Classes, functions, and methods:
 - `LogisticRegression().fit(x)` -> Scikit-Learn class for training the logistic regression model.
 - `LogisticRegression().coef_[0]` -> return the coefficients or weights of the LR model
@@ -104,7 +104,7 @@ Accuracy Rate:
 Compare target values and predicted values, if they are the same, return True; otherwise, return False.  
 $$\frac{Numbers\quad of\quad True}{Numbers\quad of\quad True + Numbers\quad of\quad False}$$
 
-### Model Interpretation
+## Model Interpretation
 Classes, functions, and methods:
 - `zip(x,y)` -> returns a new list with elements from x joined with their corresponding elements on y  
 - `LogisticRegression().intercept_[0]` -> returns $w0$.  
@@ -113,7 +113,7 @@ Classes, functions, and methods:
 
 The fundamental logic of binary logistic regression involves calculating a score for each record using assigned weights. This score is then applied to a sigmoid function to determine its probability.  
 
-### Using Model
+## Using Model
 We trained the logistic regression model with the full training dataset (training + validation), considering numerical and categorical features. Thus, predictions were made on the test dataset, and we evaluated the model using the accuracy metric.
 - Apply `DictVectorizer().fit_tranform()` and `LogisticsRegression().fit()`on full training dataset.  
 - Apply `DictVectorizer().tranform()` and `LogisticsRegression().predict_proba()` on test datatset.  
