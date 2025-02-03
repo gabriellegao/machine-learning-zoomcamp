@@ -154,14 +154,14 @@ There are multiple libraries providing virtual environment functionality.
 ```bash
 pip install pipenv
 ```
-After running this bash command, `Pipfile` and `Pipfile.lock` will be downloaded to the current directory
 ### Install Libraries on Virtual Environment
-All installed libraries can be found in `Pipfile`
+After running this bash command, `Pipfile` and `Pipfile.lock` will be generated and loaded to the current directory.  
+All installed libraries can be found in `Pipfile`.
 ```bash
 pipenv install numpy scikit-learn==0.24.1 flask gunicorn
 ```
 ### Launch Subshell in Virtual Environment
-This command also returns the location storing this virtual environment.
+This command launch the subshell, and also returns the location storing this virtual environment.
 ```bash
 # Method1
 pipenv shell
