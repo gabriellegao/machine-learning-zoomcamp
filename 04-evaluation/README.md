@@ -72,7 +72,7 @@ $$FPR = \cfrac{FP}{(TN + FP)}$$
 $$TPR = \cfrac{TP}{(FN + TP)}$$
 ***以 Actual value = Positive为底, 数值越大越好***
 
-***mModel的curve越靠近ideal的curve越好, 越远离random的curve越好***
+***Model的curve越靠近ideal的curve越好, 越远离random的curve越好***
 
 当threshold足够准确
 - False Positive and False Negative = 0  
@@ -107,7 +107,7 @@ The AUROC of a bad model is 0.5, and an ideal one is 1.
 
 Classes and methods:
 - `auc(x, y)` -> sklearn.metrics class for calculating area under the curve of the x and y datasets. For ROC curves x would be false positive rate, and y true positive rate.
-- `roc_auc_score(x, y)` -> sklearn.metrics class for calculating area under the ROC curves of the x false positive rate and y true positive rate datasets.
+- `roc_auc_score(y_actual, y_pred)` -> sklearn.metrics class for calculating area under the ROC curves on actual y and predicted y.
 - `randint(x, y, size=z)` -> np.random class for generating random integers from the “discrete uniform” distribution; from x (inclusive) to y (exclusive) of size z.
 
 ## K-Fold Cross Validation

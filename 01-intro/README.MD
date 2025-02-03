@@ -1,3 +1,4 @@
+# Intro: Basic Concepts
 ## What is Machine Learning?
 Machine learning is a process of extracting patterns from data, including two types:
 - features
