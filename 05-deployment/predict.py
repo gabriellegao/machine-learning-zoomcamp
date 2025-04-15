@@ -23,7 +23,7 @@ def predict():
         "churn_probability": float(y_pred), #convert numpy float to python float
         "churn": bool(churn) #convert numpy boolean to python boolean
     }
-    return jsonify(result) #convert dict to json
+    return jsonify(result) #convert dict to http json
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=9696) #0.0.0.0: localhost

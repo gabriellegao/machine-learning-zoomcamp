@@ -1,0 +1,16 @@
+{
+    "Statement": [
+    {
+        "Sid": "create-repository",
+        "Effect": "Allow",
+        "Principal": {
+        "AWS": "arn:aws:iam::209479306945:root"
+        },
+        "Action": [
+        "ecr:CreateRepository",
+        "ecr:ReplicateImage"
+        ],
+        "Resource": "arn:aws:ecr:us-east-2:209479306945:repository/*"
+    }
+    ]
+}

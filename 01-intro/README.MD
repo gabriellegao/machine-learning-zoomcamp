@@ -27,7 +27,7 @@ Output probabilities as predictions and define a threshold to clarify emails as 
 - Target variable (y): a vector (one-dimension array) of predictions. 
 - Model (g): input X and output predicted y. Predict predicted y as close as possible to actual y (target variable), which is traning.
 - Each row of X matches each y.
-- Formula: $\mathbf {g(X) = y}$
+- Formula: ${g(X) = y}$
 
 ### Types of SML
 - Regression: numerical output
@@ -93,10 +93,10 @@ $vector2 = [1,0,0,2]$
 $vector1 * vector2 = 2*1 + 4*0 + 5*0 + 6*2 = 14$
 
 ### Matrix-Vector Multiplication 
-Formula $\mathbf{U *v}$  
+Formula ${U *v}$  
 
 $
-\mathbf{U *v} =
+{U *v} =
 \begin{bmatrix}
 u_{0}^{T} * v \\
 u_{1}^{T} * v \\
@@ -104,10 +104,10 @@ u_{2}^{T} * v
 \end{bmatrix}
 $  
 
-Matrix $\mathbf{U}$   
+Matrix ${U}$   
 
 $
-\mathbf{U} =
+{U} =
 \begin{bmatrix}
 2 & 4 & 5 & 6 \\
 1 & 2 & 1 & 2 \\
@@ -115,10 +115,10 @@ $
 \end{bmatrix}
 $  
 
-Column vector $\mathbf{v}$  
+Column vector ${v}$  
 
 $
-\mathbf{v} =
+{v} =
 \begin{bmatrix}
 1 \\
 0.5 \\
@@ -132,17 +132,17 @@ $
 
 ### Matrix-Matrix Multiplication
 Formula  
-Matrix $\mathbf{U * V}$   
+Matrix ${U * V}$   
 
 $
-\mathbf{U * V} =
+{U * V} =
 \begin{bmatrix}  
-U * V_{0}  , U * V_{1} , U * V_{2} 
+U * v_{0}  , U * v_{1} , U * v_{2} 
 \end{bmatrix}
 $  
 
 $
-\mathbf{U} =
+{U} =
 \begin{bmatrix}
 2 & 4 & 5 & 6 \\
 1 & 2 & 1 & 2 \\
@@ -150,10 +150,10 @@ $
 \end{bmatrix}
 $  
 
-Matrix $\mathbf{V}$   
+Matrix ${V}$   
 
 $
-\mathbf{V} =
+{V} =
 \begin{bmatrix}
 1 & 1 & 2 \\
 0 & 0.5 & 1 \\
@@ -162,10 +162,10 @@ $
 \end{bmatrix}
 $  
 
-Column vector $\mathbf{V_0, V_1, V_2}$  
+Column vector ${v_0, v_1, v_2}$  
 
 $
-\mathbf{V_0} =
+{v_0} =
 \begin{bmatrix}
 1 \\
 0 \\
@@ -174,7 +174,7 @@ $
 \end{bmatrix}
 $
 $
-\mathbf{v_1} =
+{v_1} =
 \begin{bmatrix}
 1 \\
 0.5 \\
@@ -183,7 +183,7 @@ $
 \end{bmatrix}
 $
 $
-\mathbf{V_2} =
+{v_2} =
 \begin{bmatrix}
 2 \\
 1 \\
@@ -195,10 +195,10 @@ $
 *Attention*  
 *The row length of matrix U should be same as the column length of matrix V*  
 ### Identity Matrix
-Formula $\mathbf{U * I = U}$  
+Formula ${U * I = U}$  
 
 $
-\mathbf{I} =
+{I} =
 \begin{bmatrix}
 1 & 0 & 0 & 0 \\
 0 & 1 & 0 & 0 \\
@@ -214,7 +214,7 @@ The requirement of a matrix $A (m \times n)$ has inverse matrix $A^{-1}$:
 3. 行列式不为零  
    
 ####  Formula  
-$\mathbf{Matrix U * Matrix U^{-1} = I}$  
+${Matrix U * Matrix U^{-1} = I}$  
 
 ### Notebook
 [Linear Algebra and Matrix Notebook](linear_algebra.ipynb)

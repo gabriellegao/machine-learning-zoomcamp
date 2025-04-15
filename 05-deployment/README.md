@@ -124,6 +124,8 @@ response = requests.post(url, json=customer).json()
 - `requests.post()`: send data to web server URL.
 - `.json()`: translate server response to readable messages
 
+## Gunicorn
+这是一个适用于Prod Env的Python WSGI HTTP Server，用来承载Flask类型的应用，更加高效的的处理HTTP requests.
 ### Start Web Server
 Install production server
 ```bash
@@ -170,7 +172,7 @@ gunicorn --bin 0.0.0.0:9696 predict:app
 # Method2
 pipenv run gunicorn --bin 0.0.0.0:9696 predict:app
 ```
-# Exit SubShell
+### Exit SubShell
 ```bash
 # Method1
 exit #log out subshell
@@ -203,7 +205,8 @@ WORKDIR /app
 # Copy files to Docker container
 COPY ["Pipfile", "Pipfile.lock", "./"] 
 
-# Install libraries listed in Pipfile
+# Install libraries in Pipfile in the environment
+# Instead of launch a virtual env
 RUN pipenv install --system --deploy
 
 # Copy script and model to Docker Container

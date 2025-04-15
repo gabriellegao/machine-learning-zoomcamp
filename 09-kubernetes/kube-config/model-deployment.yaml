@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tf-serving-clothing-model
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tf-serving-clothing-model
+  template:
+    metadata:
+      labels:
+        app: tf-serving-clothing-model
+    spec:
+      containers:
+      - name: tf-serving-clothing-model
+        # image: clothing-model-tf-serving:xception-v4-001 # Local Image Name
+        image: 209479306945.dkr.ecr.us-east-2.amazonaws.com/mlzoomcamp-images:clothing-model-tf-serving-xception-v4-001
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "1"
+        ports:
+        - containerPort: 8500
