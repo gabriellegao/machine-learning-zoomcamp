@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: # These two lines specify deployment anem
+  name: ping-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels: # Pods with label "ping" belongs to Deployment "ping-deployment"
+      app: ping
+  template: # Deine Pods in the Deployment
+    metadata:
+      labels: # Label for Pods
+        app: ping
+    spec:
+      containers:
+      - name: ping-pod
+        image: ping:v001
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 9696

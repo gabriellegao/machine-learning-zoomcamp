@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-clothing-model
+spec:
+  selector:
+    matchLabels:
+      app: gateway-clothing-model
+  template:
+    metadata:
+      labels:
+        app: gateway-clothing-model
+    spec:
+      containers:
+      - name: gateway-clothing-model
+        # image: clothing-model-gateway:002 # Local Image Name
+        image: 209479306945.dkr.ecr.us-east-2.amazonaws.com/mlzoomcamp-images:clothing-model-gateway-002
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 9696
+        env:
+        - name: TF_SERVING_HOST
+          value: tf-serving-clothing-model.default.svc.cluster.local:8500

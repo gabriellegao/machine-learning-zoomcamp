@@ -1,0 +1,10 @@
+services:
+  tf-serving:
+    image: clothing-model-tf-serving:xception-v4-001
+  gateway:
+    image: clothing-model-gateway:002
+    environment:
+      - TF_SERVING_HOST=tf-serving:8500
+    ports:
+      - "9696:9696"
+

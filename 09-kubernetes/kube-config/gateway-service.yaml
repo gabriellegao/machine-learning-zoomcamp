@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-clothing-model
+spec:
+  type: LoadBalancer
+  selector:
+    app: gateway-clothing-model
+  ports:
+  - port: 80
+    targetPort: 9696

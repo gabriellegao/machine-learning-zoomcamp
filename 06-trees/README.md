@@ -161,7 +161,7 @@ model.preidct(dval)
 
 ## XGBoost Parameter Tuning
 ### `eta`
-`eta`可以理解成XGBoost模型的学习或者成长率, 这个参数很大程度影响着模型的稳定性和准确性. XGBoost中的每个sub model都是根据前一个模型的prediction error来修正自己的模型架构, 而`eta`决定了这次修正误差的幅度大小. Default = 0.3, range: [0, 1]. 
+`eta`可以理解成XGBoost模型的学习率或者成长率, 这个参数很大程度影响着模型的稳定性和准确性. XGBoost中的每个sub model都是根据前一个模型的prediction error来修正自己的模型架构, 而`eta`决定了这次修正误差的幅度大小. Default = 0.3, range: [0, 1]. 
 - `eta`越小, 代表修正幅度越小, 接近正确值的可能性越大, 但缺点是需要训练更多的sub models.
 - `eta`越大, 代表修正幅度越大, 偏离正确值的可能性越大.
 
