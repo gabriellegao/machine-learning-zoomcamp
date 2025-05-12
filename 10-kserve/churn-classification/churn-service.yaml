@@ -1,0 +1,12 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "churn"
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: sklearn
+      # image: kserve-sklearnserver:preict_proba-3.8-1.0
+      image: agrigorev/sklearnserver:3.8-1.0-predict-proba
+      storageUri: "http://10.0.0.43:8000/churn-classification/model.joblib"

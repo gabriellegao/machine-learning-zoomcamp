@@ -11,3 +11,7 @@ __MACOSX
 bank-additional/
 
 clothing-dataset-small/
+
+kserve/
+
+model.joblib

@@ -46,12 +46,12 @@ docker run -it --rm \ #Create an container
 
 ## Flask
 ### TF Serving with Flask
-用Flask将TF Serving上传至port
+用Flask将TF Serving上传至port  
 [gateway.py](./gateway.py)
 
 ### Test Connection
-在gatway运行之后，发送POST request到port
-[connection-test.py](./test.py)
+在gatway运行之后，发送POST request到port  
+[connection-test.py](./test.py)  
 ***在运行connection-test之前，需先启动gateway***
 
 ## Docker
@@ -98,6 +98,8 @@ TF_SERVING_HOST=tf-serving:8500
 
 ## Kubernetes - Local Cluster
 Kubernetes(又称K8)，是一个与docker有强关联性的container管理平台。拥有自动管理，自动修复，自动扩容等功能.  
+- Cluster: Data center
+- Namespace: Self-defined folders in data center.
 - Pod：单个或多个任务, 由image生成的containers
 - Node：包含、承载、运行所有Pod的机器（虚拟机或者物理机）
 - Deployment：Manage a group of pods with the same image and config
@@ -109,13 +111,14 @@ Ingress -> External Service -> Node -> Available Pod in Deployment -> Internal S
 ```
 ![K8s Architecture](./image/k8s-architecture.png)
 ### Setup K8s
-Docker自带`K8s`和`kubectl`, 所以不需要另外下载. 但是Kind需要手动下载, `Kind`是辅助`K8 Cluster`在本地`Docker Container`环境运行的工具.
+Docker自带`K8s`和`kubectl`, 所以不需要另外下载. 但是Kind需要手动下载, `Kind`是辅助`K8s Cluster`在本地`Docker Container`环境运行的工具.
 ```bash
 # 安装Kind
 brew install kind
-# 创建K8 Cluster
+# 创建K8s Cluster
 kind create cluster
-# 删除K8 Cluster
+kind create cluster --name=<cluster-name>
+# 删除K8s Cluster
 kind delete cluster
 ```
 
@@ -230,7 +233,7 @@ python test.py
 用`kubectl get svc`可以查看Gateway Service对应的External IP Address.
 ```python
 # New URL: External IP Address + Endpoint
-url = url = 'http://a4a853d8db21b47f892015f964cc4ab5-1561477282.us-east-2.elb.amazonaws.com/predict'
+url = 'http://a4a853d8db21b47f892015f964cc4ab5-1561477282.us-east-2.elb.amazonaws.com/predict'
 ```
 ### Delete EKS Cluster
 ```bash
