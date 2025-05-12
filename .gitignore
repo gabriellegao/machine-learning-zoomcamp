@@ -15,3 +15,7 @@ clothing-dataset-small/
 kserve/
 
 model.joblib
+
+model_2024_hairstyle.keras
+
+model_2024_hairstyle.tflite
