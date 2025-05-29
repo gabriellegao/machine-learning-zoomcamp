@@ -100,7 +100,7 @@ Classes, functions, and methods:
 - `LogisticRegression().predict[x]` -> make predictions on the x dataset, hard prediction.  
 - `LogisticRegression().predict_proba[x]` -> make predictions on the x dataset by returning two columns with their probabilities for the two categories (0 and 1), soft predictions.  
 
-Accuracy Rate:  
+### Accuracy Rate:  
 Compare target values and predicted values, if they are the same, return True; otherwise, return False.  
 $$\frac{Numbers\quad of\quad True}{Numbers\quad of\quad True + Numbers\quad of\quad False}$$
 
