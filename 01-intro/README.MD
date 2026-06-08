@@ -115,6 +115,16 @@ $
 \end{bmatrix}
 $  
 
+revised
+[
+U =
+\begin{bmatrix}
+2 & 4 & 5 & 6 \
+1 & 2 & 1 & 2 \
+3 & 1 & 2 & 1
+\end{bmatrix}
+]
+
 Column vector ${v}$  
 
 $
