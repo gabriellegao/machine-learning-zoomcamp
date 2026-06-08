@@ -244,4 +244,18 @@ data_augmentation = keras.Sequential([
 ## Test Model
 - `keras.models.load_model(path)`: method to load saved model  
 - `model.evaluate()`: method to evaluate the performance of the model based on the   evaluation metrics
-- `model.predict()`: method to make predictions of output depending on the input  
+- `model.predict()`: method to make predictions of output depending on the input
+
+## Gradient Descent
+| 方法                     | 每次用多少数据 / 特点            | 适合场景            |
+| ---------------------- | ----------------------- | --------------- |
+| Batch Gradient Descent | 全部数据                    | 小数据集，理论学习       |
+| SGD                    | 每次 1 条数据                | 大数据、快速迭代        |
+| Mini-batch GD          | 每次一小批数据                 | 神经网络最常用         |
+| Momentum               | 加入历史方向                  | 减少震荡，加速下降       |
+| Nesterov               | 预判式 Momentum            | 更稳定的 Momentum   |
+| AdaGrad                | 自动调小频繁参数的学习率            | 稀疏特征、文本         |
+| RMSProp                | 改进 AdaGrad              | 深度学习、RNN        |
+| Adam                   | Momentum + RMSProp      | 大多数深度学习任务       |
+| AdamW                  | Adam + 更好的 weight decay | Transformer、大模型 |
+
