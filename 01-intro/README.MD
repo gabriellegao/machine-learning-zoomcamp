@@ -90,7 +90,7 @@ $vector1 + vector2 = [2+1, 4+0, 5+0, 6+2] = [3,4,5,8]$
 ### Vector-Vector Multiplication
 $vector1 = [2,4,5,6]$  
 $vector2 = [1,0,0,2]$  
-$vector1$ $\times$ $vector2$ = [$2\times1$ + $4$$\times$0 + $5$$\times$$0$ + $6$$\times$$2$] = $14$
+$vector1$ $\times$ $vector2$ = [$2 \times 1$ + $4 \times 0$ + $5 \times 0$ + $6 \times 2$] = $14$
 
 ### Matrix-Vector Multiplication 
 Formula ${U *v}$  
