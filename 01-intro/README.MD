@@ -104,7 +104,7 @@ u_{2}^{T} &times; v
 \end{bmatrix}
 $  
 
-Matrix ${U}$   
+Matrix (U) 
 
 $
 {U} =
