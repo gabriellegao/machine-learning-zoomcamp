@@ -95,14 +95,14 @@ $vector1$ $\times$ $vector2$ = $2 \times 1$ + $4 \times 0$ + $5 \times 0$ + $6 \
 ### Matrix-Vector Multiplication 
 Formula {U &times; v}
 
-$
+$$
 {U &times;v} =
 \begin{bmatrix}
 u_{0}^{T} &times; v \\
 u_{1}^{T} &times; v \\
 u_{2}^{T} &times; v
 \end{bmatrix}
-$  
+$$ 
 
 Matrix (U) 
 
