@@ -157,22 +157,6 @@ history = model.fit(train_ds,
     epochs=10, # how many times to iterator the whole dataset
     validation_data=val_ds)
 ```
-## Evaluation
-### Loss
-用于比较`actual`和`prediction`之间的差异, 来判断模型的好坏. 具体内容在前面`Dense Layer`片段有描述
-
-### Regularization
-控制模型复杂程度, 防止overfitting
-
-### Optimizer
-根据`Loss`, `Regularization`或者其他判断标准, 反馈数据会被`Optimizer`接收并且使用不同类型的`Gradient Descent`优化参数.
-
-`Learning Rate` is a tuning parameter in `Gradient Descent` that determines the step size (how big or small) at each iteration while moving toward a mininum of a loss function.  
-可以比作学习速度，学的太快（数值太大），忘得快，真正重要的内容没有吸收. 学的太慢（数值太小），学习周期过长，重要的内容没学到.  
-
-Try different learning rate in `optimizer = keras.optimizers.Adam(learning_rate)`.
-
-
 
 ## CheckPoint
 `ModelCheckpoint` is a method in `tensorflow.keras.callbacks` to save model and weigths.
@@ -215,6 +199,21 @@ drop = keras.layers.Dropout(droprate)(inner)
 outputs = keras.layers.Dense(10)(drop)
 ```
 `droprate` determines the percentage of frozen nodes to total.
+
+## Evaluation & Optimization in Dense Layer Recap
+### Loss
+用于比较`actual`和`prediction`之间的差异, 来判断模型的好坏. 具体内容在前面`Dense Layer`片段有描述
+
+### Regularization
+控制模型复杂程度, 防止overfitting
+
+### Optimizer
+根据`Loss`, `Regularization`或者其他判断标准, 反馈数据会被`Optimizer`接收并且使用不同类型的`Gradient Descent`优化参数.
+
+`Learning Rate` is a tuning parameter in `Gradient Descent` that determines the step size (how big or small) at each iteration while moving toward a mininum of a loss function.  
+可以比作学习速度，学的太快（数值太大），忘得快，真正重要的内容没有吸收. 学的太慢（数值太小），学习周期过长，重要的内容没学到.  
+
+Try different learning rate in `optimizer = keras.optimizers.Adam(learning_rate)`.
 
 ## Data Augmentation
 The benefits of data augmentation is to expand dataset size, increase the diversity and complexity of NN model.
