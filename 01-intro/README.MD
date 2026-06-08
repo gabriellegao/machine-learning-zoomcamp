@@ -93,14 +93,14 @@ $vector2 = [1,0,0,2]$
 $vector1$ $\times$ $vector2$ = $2 \times 1$ + $4 \times 0$ + $5 \times 0$ + $6 \times 2$ = $14$
 
 ### Matrix-Vector Multiplication 
-Formula ${U *v}$  
+Formula {U &times; v}
 
 $
 {U &times;v} =
 \begin{bmatrix}
-u_{0}^{T} * v \\
-u_{1}^{T} * v \\
-u_{2}^{T} * v
+u_{0}^{T} &times; v \\
+u_{1}^{T} &times; v \\
+u_{2}^{T} &times; v
 \end{bmatrix}
 $  
 
