@@ -37,9 +37,9 @@ In general, the dataset is splitted into three parts: training, validation, and 
 
 ## Linear Regression: Simple Version
 ### Basic Formula  
-$
+$$
 g(x_{i}) = w_{0} + w_{1}×x_{i1} + w_{2}×x_{i2} + w_{3}×x_{i3} = w_0 + \sum_{j=1}^3 x_{ij} \times W_j
-$ 
+$$ 
 ### Numpy `log()` and `expm1()`
 `numpy.log()` and `numpy.exp()` are inversely related, the same as `log1p()` and `expm1()`
 
@@ -47,32 +47,31 @@ $
 ### Upgraded Formula
 The upgraded fromula adds 1 to each record $x_{i}^T$   
 
-$g(x_{i}) = w_{0} \times 1+ x_{i}^T \times W = (1 +x_{i}^T) \times W$  
+$g(x_{i})$ = $w_{0} \times 1$+ $x_{i}^T \times W$ = $(1 +x_{i}^T) \times W$ 
 
-$
-X=
+$$X=
 \begin{bmatrix}
     1+x_{1}^{T} \\
     1+ x_{2}^{T} \\
     \vdots \\
     1+x_{n}^{T}
-\end{bmatrix}
-$
+\end{bmatrix}$$
 $\ =$
-$\begin{bmatrix}
+$$\begin{bmatrix}
     1 & x_{11} & x_{12} & \dots  & x_{1d} \\
     1 & x_{21} & x_{22} & \dots  & x_{2d} \\
     \vdots & \vdots & \ddots & \vdots \\
     1 & x_{n1} & x_{n2} & \dots  & x_{nd}
-\end{bmatrix}$
+\end{bmatrix}$$
+
 $\quad$
-$W =
+$$W =
 \begin{bmatrix}
     w_{0} \\
     w_{1} \\
     \vdots \\
     w_{n}
-\end{bmatrix}$
+\end{bmatrix}$$
 
 
 ${g(X)} = {y} =
