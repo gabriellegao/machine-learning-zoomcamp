@@ -104,30 +104,20 @@ u_{2}^{T} &times; v
 \end{bmatrix}
 $$ 
 
-Matrix (U) 
+Matrix ${U}$ 
 
-$
+$$
 {U} =
 \begin{bmatrix}
 2 & 4 & 5 & 6 \\
 1 & 2 & 1 & 2 \\
 3 & 1 & 2 & 1
 \end{bmatrix}
-$  
-
-revised
-[
-U =
-\begin{bmatrix}
-2 & 4 & 5 & 6 \
-1 & 2 & 1 & 2 \
-3 & 1 & 2 & 1
-\end{bmatrix}
-]
+$$  
 
 Column vector ${v}$  
 
-$
+$$
 {v} =
 \begin{bmatrix}
 1 \\
@@ -135,7 +125,7 @@ $
 2 \\
 1
 \end{bmatrix}
-$  
+$$  
 
 *Attention*  
 *The row length of matrix should be the same as the length of vector*
@@ -144,25 +134,25 @@ $
 Formula  
 Matrix ${U * V}$   
 
-$
+$$
 {U * V} =
 \begin{bmatrix}  
 U * v_{0}  , U * v_{1} , U * v_{2} 
 \end{bmatrix}
-$  
+$$  
 
-$
+$$
 {U} =
 \begin{bmatrix}
 2 & 4 & 5 & 6 \\
 1 & 2 & 1 & 2 \\
 3 & 1 & 2 & 1
 \end{bmatrix}
-$  
+$$  
 
 Matrix ${V}$   
 
-$
+$$
 {V} =
 \begin{bmatrix}
 1 & 1 & 2 \\
@@ -170,11 +160,11 @@ $
 0 & 2 & 1 \\
 2 & 1 & 0
 \end{bmatrix}
-$  
+$$  
 
 Column vector ${v_0, v_1, v_2}$  
 
-$
+$$
 {v_0} =
 \begin{bmatrix}
 1 \\
@@ -182,8 +172,8 @@ $
 0 \\
 2
 \end{bmatrix}
-$
-$
+$$
+$$
 {v_1} =
 \begin{bmatrix}
 1 \\
@@ -191,8 +181,8 @@ $
 2 \\
 1
 \end{bmatrix}
-$
-$
+$$
+$$
 {v_2} =
 \begin{bmatrix}
 2 \\
@@ -200,14 +190,14 @@ $
 1 \\
 0
 \end{bmatrix}
-$  
+$$  
 
 *Attention*  
 *The row length of matrix U should be same as the column length of matrix V*  
 ### Identity Matrix
 Formula ${U * I = U}$  
 
-$
+$$
 {I} =
 \begin{bmatrix}
 1 & 0 & 0 & 0 \\
@@ -215,7 +205,7 @@ $
 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 1
 \end{bmatrix}
-$  
+$$  
 
 ### Matrix Inverse
 The requirement of a matrix $A (m \times n)$ has inverse matrix $A^{-1}$:  
