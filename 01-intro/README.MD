@@ -96,7 +96,7 @@ $vector1$ $\times$ $vector2$ = $2 \times 1$ + $4 \times 0$ + $5 \times 0$ + $6 \
 Formula ${U *v}$  
 
 $
-{U *v} =
+{U &times;v} =
 \begin{bmatrix}
 u_{0}^{T} * v \\
 u_{1}^{T} * v \\
