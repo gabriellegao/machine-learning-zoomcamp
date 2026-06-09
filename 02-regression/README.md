@@ -93,11 +93,16 @@ $
 $  
 
 $
+I \times W = (X^T \times X)^{-1} \times X^T \times y
+$
+
+$
 W = (X^T \times X)^{-1} \times X^T \times y
 $
 
 ***Attention***   
-***Add 1 to each record in Maxtrix $X$***
+***Add 1 to each record in Maxtrix $X$***  
+***For non-squared matrix $X$, $X^{-1}$ doesn't exist, so that $X^{-1} \times X \times W = X^{-1} \times y$ will not work***
 
 ## Car Price Baseline Model
 Linear regression only applies to numerical varibales.  
@@ -130,7 +135,7 @@ Category B -> [0, 1, 0]
 Category C -> [0, 0, 1]
 
 ## Regularization
-The root cause of having extremely large weights is noise in dataset. One situation would be some rows or coloumns in a matrix are 99% similar (e.g. 1.00001 and 1). This matrix looks like a Singular Matrix but still invertible, and the weight caculated based on this matrix is unreasonaly hight.   
+Noise in the data results extremely large weights for a model. One situation would be some rows or coloumns in a matrix are 99% similar (e.g. 1.00001 and 1). This matrix looks like a Singular Matrix but still invertible, and the weight caculated from this matrix is unreasonaly hight.   
 To solve this issue, one alternative is adding a small decimal to the diagonal of the feature matrix. One rule of this small decimal is the larger the small decimal, the smaller the weights. 
 
 $

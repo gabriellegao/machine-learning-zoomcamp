@@ -50,7 +50,7 @@ train_gen = image_dataset_from_directory(
     image_size = (150, 150), # the size of images
     batch_size = 32) # the number of images in each batch
 ```
-`X`包含32张图片(`batch size`), 每张含有3个channels(`red`, `green`, `blue`), 每个channel大小为`150 * 150`(`image size`). `X.shap`e为`(32, 150, 150, 3)`, 其中第一个`150`表示有150行, 第二个`150`表示有150列, `3`表示每个像素中的三元素比例.   
+`X`包含32张图片(`batch size`), 每张含有3个channels(`red`, `green`, `blue`), 每个channel大小为`150 * 150`(`image size`). `X.shape`为`(32, 150, 150, 3)`, 其中第一个`150`表示有150行, 第二个`150`表示有150列, `3`表示每个像素中的三元素比例.   
 
 `y`为图片所在folder的folder index (e.g. 1,2,3).
 ```python
@@ -187,7 +187,7 @@ Here are some commonly used activation functions in intermediate dense layer:
 In output dense layer, `softmax` is the most popular method for multi-class questions.
 
 ## Regularization and Dropout
-Dropout is a technique that **prevents overfitting** by randomly freeze nodes in dense layers.In other words, dropout force NN model to learn data in a higher data and ignore outliers.
+Dropout is a technique that **prevents overfitting** by randomly freeze nodes in dense layers. In other words, dropout technique forces NN model to learn data from a higher-level view and ignore outliers.
 ```python
 ## Inner 
 inner = keras.layers.Dense(size_inner, activation = 'relu')(vectors)
@@ -245,7 +245,14 @@ data_augmentation = keras.Sequential([
 - `model.evaluate()`: method to evaluate the performance of the model based on the   evaluation metrics
 - `model.predict()`: method to make predictions of output depending on the input
 
-## Gradient Descent
+# Additional Knowledge
+## GradientTape
+`tf.GradientTape()`用于记录 forward（前向传播）过程中的所有运算，并计算出最终的总 loss。随后，它会自动执行 backward（反向传播），计算每个 parameter 对 loss 的影响程度（即梯度）。如果梯度大，说明parameter重要，如果梯度小，则说明parameter不重要。parameter的改动幅度也受learning rate的影响。
+
+## Gradient & Learning Rate
+Gradient控制着参数是否需要改动，以及改动的方向（增大或减小）。Learning rate控制着参数的改动幅度。
+
+## Gradient Descent的各种类型
 | 方法                     | 每次用多少数据 / 特点            | 适合场景            |
 | ---------------------- | ----------------------- | --------------- |
 | Batch Gradient Descent | 全部数据                    | 小数据集，理论学习       |

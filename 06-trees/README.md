@@ -94,6 +94,11 @@ Also, in Random Forest, each decision tree is trained independently.
 ### Boostrapping
 **Bootstrapping** is a resampling technique where numerous subsets of the data are created by sampling the original data **with replacement**. This means that some data points may appear multiple times in a single bootstrap sample, while others may be excluded. In Random Forest, each decision tree is trained on a distinct bootstrap sample, further contributing to the diversity and robustness of the ensemble.
 
+### Hard Voting & Soft Voting
+`Hard Voting` returns concrete Yes or No predicted value.  
+`Soft Voting` gives probabilities of Yes or No.  
+The final predicted values are decided by tie-breaking rule. The predictions getting the most votes "win".
+
 ### Parameter Tuning
 - `max_depth`: controls the maximum levels of each decision tree
 - `n_estimators`: determines the number of trees in the forest.
@@ -109,7 +114,7 @@ Also, in Random Forest, each decision tree is trained independently.
 - `xgb_model.predict(dval)` -> make a prediction on transformed `davl`.
 - `%%capture output` -> capture "print-out" message and store it in `output` variable.
 ### Gradient Boost
-Unlike Random Forest where each decision tree trains **independently**, in the Gradient Boosting Trees, the models are combined **sequentially**, where each model learns the prediction errors made by the previous model and improve the prediction. This process continues to `n` number of iterations, and in the end, all the predictions get combined to make the final prediction.
+Unlike Random Forest where each decision tree trains **independently**, in the Gradient Boosting Trees, the models are combined **sequentially**, where each model learns the prediction errors returned from the previous model and improve the prediction. This process continues to `n` number of iterations, and in the end, all the predictions get combined to make the final prediction.
 
 ### XGBoost
 **XGBoost** is one of the libraries which implements the gradient boosting technique.
@@ -120,10 +125,11 @@ conda install -c conda-forge llvm-openmp #xgboost依赖文件
 #### Prepare Dataset
 Transform X dataset to XGBoost required format for better performance.
 ```python
-xgboost.DMatrix(X, 
-                label, # y actual value
-                feature_names=[List] #a list of `DictVectorizer-transformed` feature names.
-                )
+xgboost.DMatrix(
+  X, 
+  label, # y actual value
+  feature_names=[List] #a list of `DictVectorizer-transformed` feature names.
+)
 ```
 
 #### Tuning Parameters
@@ -132,22 +138,24 @@ Define more parameters in `xgb_params`
 xgb_params={
     'eta':0.3, # learning rate, which indicates how fast the model learns.
     'max_depth':6, # same as max_depth in Random Forest
-    'min_child_weight':1, # ame as min_samples_leaf in Random Forest
+    'min_child_weight':1, # same as min_samples_leaf in Random Forest
     'objective':'binary:logistic', # identify model types, either regression or classification
     'eval_metric':'auc', # define evaluation metrics, like auc or log loss
     'nthread':8, # used for parallelized training.
     'seed':1, # random state
-    'verbosity':1 # training warning; 0: silence mode; 1: warning
+    'verbosity':1, # training warning; 0: silence mode; 1: warning
+    'early_stopping_round':20 #stop training at # rounds if no improvements.
 }
 ```
 #### Train Model
 Train the XGBoost model with pre-defined `xgb_params` on transformed X dataset `dtrain`.
 ```python
-xgb.train(xgb_params, 
+xgb.train(
+          xgb_params, 
           dtrain, 
           num_boost_round, 
           evals, 
-          verbose_evals 
+          verbose_evals
           )
 ``` 
 - `evals` provides more evaluation datasets in this format `[(dtrain, 'train'), (dval, 'val')]`. The evaluation metrics is defined at `eval_metrics` in `xgb_params`.
@@ -182,12 +190,12 @@ Subsample ratio of the training instances. Setting it to 0.5 means that model wo
 This is similar to random forest, where each tree is made with the subset of randomly choosen features.
 
 - `lambda` (default=1)  
-Also called reg_lambda. L2 regularization term on weights. Increasing this value will make model more conservative.  
+Also called `reg_lambda`. L2 regularization term applys on weights. Increasing this value will make model more conservative.  
 L2 regularization通过约束叶子节点的权重, 使模型更保守.
 
 
 - `alpha` (default=0)  
-Also called reg_alpha. L1 regularization term on weights. Increasing this value will make model more conservative.  
+Also called `reg_alpha`. L1 regularization term applys on weights. Increasing this value will make model more conservative.  
 L1 regularization也是通过约束叶子节点的权重, 使模型更保守. 但L1的约束更激进, 他会强制权重变为0, 减少feature数量.
 
 ### More about Tree Models

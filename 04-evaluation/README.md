@@ -118,3 +118,35 @@ Libraries, classes and methods:
 - `KFold(k, s, x)` -> sklearn.model_selection class for calculating the cross validation with k folds, s boolean attribute for shuffle decision, and an x random state
 - `kfold.split(x)` -> sklearn.Kfold method for splitting the x dataset with the attributes established in the Kfold's object construction.
 - `for i in tqdm()` -> library for showing the progress of each i iteration in a for loop.
+
+## Additional
+### Classification Metrics
+- Accuracy
+- Precision, Recall, F1
+- Confusion Matrix
+- ROC, AUC
+
+### Regression Metrics
+- RMSE
+- MAE
+- R-squared score
+
+### Cross Validation
+- K-Fold, StratifiedKFold
+- `cross_val_score`, `cross_validate`
+- Nested Cross-Validation
+
+#### K-Fold, StratifiedKFold
+这两个方法同属分割数据到不同的fold，随机留一组作为validation dataset, 其他组作为training dataset，循环往复.  
+区别在于`KFold`使用于regression或者分类均衡的classification, 而`StratifiedKFold`适用于classification且分类比例均衡.  
+#### `cross_val_score`, `cross_validate`
+这两个方法同属把fold和evaluation结合，给每个折打分. 区别在于`cross_validate`是升级版.
+
+
+### Model Selection / Hypterparameter Tuning
+- GridSearchCV, RandomizedSearchCV
+- Evalution during tuning
+  
+#### GridSearchCV, RandomizedSearchCV
+这两个方法把fold, model traning and scoring结合, 最后会给出最佳parameters和其对应的scores.  
+区别在于`GridSearchCV`采用穷举方法，将所有的参数都一一对应组合训练，优点在于能给出最好的模型参数，缺点是成本高。而`RandomizedSearchCV`随机抽取参数组合训练，优点在于省时省力，缺点在于有概率错过最佳模型参数.
