@@ -40,7 +40,7 @@ Vector Representation receive data from convolutional layers and convert them to
 - Vector representation and Pooling
 - Dense layer: custom model
 - Output layer: multi-class prediction
-### Prepare Data
+### Step1: Prepare Data
 `image_dataset_from_directory`可以自动解析feature values and target values
 ```python
 from keras.preprocessing import image_dataset_from_directory
@@ -65,7 +65,7 @@ X,y = train_gen \
 train_gen.class_names
 ```
 
-### Convolutional Layer
+### Step2: Convolutional Layer
 In this case, we only use convolution layer from `Xception` model
 ```python
 # Xception is a full neural network model, including convolutional layer and dense layer.
@@ -76,7 +76,7 @@ base_model = Xception(weights='imagenet',
 base_model.trainable=False # freeze convolutional layer (don't train)
 ```
 
-### Vector Representation and Pooling
+### Step3: Vector Representation and Pooling
 The process of reducing 3-D array to 1-D array is called `Pooling`.  
 In this case, we apply average pooling method `GlobalAveragePooling2D` on 3-D array, calculating the average of each `5 * 5` array and storing the result in the new 1-D array
 ```python
@@ -111,13 +111,33 @@ The shape of array - `32 * 2048`
 - `32`: batch size
 - `2048`: the number of feature maps
 
-### Dense Layer: Weights
+### Step4: Dense Layer: Weights
 Randonly assign weights to each class
 ```python
 outputs = keras.layers.Dense(10)(vectors)
 ```
 
-### Dense Layer: Optimizer and Losses
+
+### Step4: Add More Layers in Dense Layer
+Adding more layers in dense layer could help the NN model more accurate. And this kind of layer is called "intermediate layer“.  
+Intermediate dense layer, same as output dense layer, has two important parameters - classes and activation method.  
+每一层Dense layer都需要定义Node的数量以及activation function.
+```python
+# Intermediate dense layer
+inner = keras.layers.Dense(size_inner, activation = 'relu')(vectors) 
+# Output dense layer
+outputs = keras.layers.Dense(10)(inner)
+```
+Here are some commonly used activation functions in intermediate dense layer:
+- `Sigmoid`: range [0, 1], the large negative number becomes 0 and the large positive number become 1.
+- `Tanh`: range [-1,1], similar as `sigmoid`
+- `ReLu`: range [0, inf], when x <= 0, f(x) = 0; when x > 0 , f(x) = x
+- `Leaky ReLU`: "upgraded" ReLu, but lack of consistency
+- `Maxout`: "upgraded" ReLu with expensive computing cost
+
+In output dense layer, `softmax` is the most popular method for multi-class questions.
+
+### Step4: Optimizer and Losses
 #### Losses
 - Compare differences between prediction and target
 - Send error info back to optimizer
@@ -145,48 +165,7 @@ model.compile(optimizer=optimizer, loss=loss, metrics = ['accuracy'])
 - `from_logits = True`: return row score without using activation method
 - `from_logits = False`: return probabilities calculating by activation method. For example, `outputs = keras.layers.Dense(10, activation='softmax')(vectors)`
 
-### Dense Layer: Translate Results
-After calculating vector and weights, we have outputs from dense layer called raw scores. Activation method, like `softmax`, translate the predicted raw output to probabilities of classes.
-
-### Train Model
-This `fit` process is to train NN model in 10 times (defined by `epoch`) - losses evaluates weights and optimizer adjusts weights (defined in `compile`).  
-In this case, training dataset is divided to `96` batches (batch size=`32`). For each epoch, weights are trained and adjusted for 96 times. For all the epochs, weights are trained for `96 * 10` times
-```python
-# Save model evaluation metrics to variable 'history', the same as `%%capture output`  
-history = model.fit(train_ds, 
-    epochs=10, # how many times to iterator the whole dataset
-    validation_data=val_ds)
-```
-
-## CheckPoint
-`ModelCheckpoint` is a method in `tensorflow.keras.callbacks` to save model and weigths.
-```python
-checkpoint = tf.keras.callbacks.ModelCheckpoint(
-    'xception_v1_{epoch:02d}_{val_accuracy:.3f}.keras', # Name model file with epoch and validation accuracy
-    save_best_only=True, # Only save model with best performance
-    monitor='val_accuracy', # Define metrics to evaluate model performance
-    mode = 'max' # Find the model with the highest val_accuracy
-)
-```
-## Add More Layers in Dense Layer
-Adding more layers in dense layer could help the NN model more accurate. And this kind of layer is called "intermediate layer“.  
-Intermediate layer, same as output dense layer, has two important parameters - classes and activation method.  
-```python
-# Intermediate dense layer
-inner = keras.layers.Dense(size_inner, activation = 'relu')(vectors) 
-# Output dense layer
-outputs = keras.layers.Dense(10)(inner)
-```
-Here are some commonly used activation functions in intermediate dense layer:
-- `Sigmoid`: range [0, 1], the large negative number becomes 0 and the large positive number become 1.
-- `Tanh`: range [-1,1], similar as `sigmoid`
-- `ReLu`: range [0, inf], when x <= 0, f(x) = 0; when x > 0 , f(x) = x
-- `Leaky ReLU`: "upgraded" ReLu, but lack of consistency
-- `Maxout`: "upgraded" ReLu with expensive computing cost
-
-In output dense layer, `softmax` is the most popular method for multi-class questions.
-
-## Regularization and Dropout
+### Step4: Regularization and Dropout
 Dropout is a technique that **prevents overfitting** by randomly freeze nodes in dense layers. In other words, dropout technique forces NN model to learn data from a higher-level view and ignore outliers.
 ```python
 ## Inner 
@@ -199,6 +178,42 @@ drop = keras.layers.Dropout(droprate)(inner)
 outputs = keras.layers.Dense(10)(drop)
 ```
 `droprate` determines the percentage of frozen nodes to total.
+
+### Step5: Dense Layer: Translate Results
+After calculating vector and weights, we have outputs from dense layer called raw scores. Activation method, like `softmax`, translate the predicted raw output to probabilities of classes.
+
+### Step6: Train Model
+This `fit` process is to train NN model in 10 times (defined by `epoch`) - losses evaluates weights and optimizer adjusts weights (defined in `compile`).  
+In this case, training dataset is divided to `96` batches (batch size=`32`). For each epoch, weights are trained and adjusted for 96 times. For all the epochs, weights are trained for `96 * 10` times
+```python
+# Save model evaluation metrics to variable 'history', the same as `%%capture output`  
+history = model.fit(train_ds, 
+    epochs=10, # how many times to iterator the whole dataset
+    validation_data=val_ds)
+```
+
+### Step7: Test Model
+- `keras.models.load_model(path)`: method to load saved model  
+- `model.evaluate()`: method to evaluate the performance of the model based on the   evaluation metrics
+- `model.predict()`: method to make predictions of output depending on the input
+
+## CheckPoint
+`ModelCheckpoint` is a method in `tensorflow.keras.callbacks` to save model and weigths.
+```python
+checkpoint = tf.keras.callbacks.ModelCheckpoint(
+    'xception_v1_{epoch:02d}_{val_accuracy:.3f}.keras', # Name model file with epoch and validation accuracy
+    save_best_only=True, # Only save model with best performance
+    monitor='val_accuracy', # Define metrics to evaluate model performance
+    mode = 'max' # Find the model with the highest val_accuracy
+)
+```
+## Neural Network总结
+*Step1:* 录入数据，发现并总结数据特征.  
+*Step2:* 数据进入Dense Layer开始学习特征，randomly assigned weights.  
+*Step3:* 定义多层Denser Layer, 以及每层的Node的数量和activation functions.  
+*Step4:* 定义Output Dense Layer.  
+*Step5:* 选择Losses, Regularization and Optimizer.  
+*Step6:* 训练并检测模型
 
 ## Evaluation & Optimization in Dense Layer Recap
 ### Loss
@@ -239,11 +254,6 @@ data_augmentation = keras.Sequential([
     # keras.layers.RandomTranslation(height_factor=0.0667, width_factor=0.0667) #平移比例 x/image size
 ])
 ```
-
-## Test Model
-- `keras.models.load_model(path)`: method to load saved model  
-- `model.evaluate()`: method to evaluate the performance of the model based on the   evaluation metrics
-- `model.predict()`: method to make predictions of output depending on the input
 
 # Additional Knowledge
 ## GradientTape
