@@ -17,7 +17,7 @@ Collect spam emails and non-spam emails
 Use conditions from rule-based systems to define features of ML model.  
 Encode features and target to binary.
 
-#### Train and Use Model03-classification/churn_projection.py
+#### Train and Use Model
 Input features, target and data to model.   
 Output probabilities as predictions and define a threshold to clarify emails as spam or non-spam.  
 
@@ -93,10 +93,10 @@ $vector2 = [1,0,0,2]$
 $vector1$ $\times$ $vector2$ = $2 \times 1$ + $4 \times 0$ + $5 \times 0$ + $6 \times 2$ = $14$
 
 ### Matrix-Vector Multiplication 
-Formula $U$ &times; $v$
+Formula ${U \times v}$
 
 $$
-{U \times v} =
+{U} \times {v} =
 \begin{bmatrix}
 u_{0}^{T} &times; v \\
 u_{1}^{T} &times; v \\

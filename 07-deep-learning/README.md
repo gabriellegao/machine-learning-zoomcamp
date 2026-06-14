@@ -22,15 +22,17 @@
 ### Simple Architecture of CNN
 Simple CNN consists of three components: convolutional layer, pooling layer, vector representation, and dense layer.
 ### Convolutional Layer
-目的：整合数据，发现数据特征  
-过程：Convolutional Layers are the first step of CNN. In each convolutional layer, each filter generate one feature map. In other words, each convolutional layer consists of multiple filters and their corresponding feature maps.  
+目的：整合数据，发现数据特征, 一个filter生成一个feature map  
+过程：Convolutional Layers are the first step of CNN. In each convolutional layer, each filter applied to each image generates one feature map. In other words, each convolutional layer consists of multiple filters and their corresponding feature maps.  
 And then, the convolutional layer will pass filters to the next convolutional layer, which generate new combined filters upon old filters.   
 ### Pooling Layer
 The main purpose of Pooling Layer is to shrink the size of convolution layers. 
+#### Max Pooling
+Choose the maximun value from the specific region
 ### Vector Representation
-Vector Representation receive data from convolutional layers and convert them to a vector
+Vector Representation receive data from convolutional layers and flatten/convert them to a vector
 ### Dense Layer
-目的：接收数据以及特征，对特征进行非线性处理，输出预测结果  
+目的：接收所有的feature maps，对特征进行非线性处理和判断，输出预测结果  
 过程：每个output对应着一种预测结果，并自带一组weights, Dense Layer将每一组weights与vector进行运算, 并放进`softmax`中转化, 得出最终的预测结果(soft max = sigmoid for multiple classes).
 
 ## Convolutional Neural Network: Coding
@@ -215,6 +217,38 @@ checkpoint = tf.keras.callbacks.ModelCheckpoint(
 *Step5:* 选择Losses, Regularization and Optimizer.  
 *Step6:* 训练并检测模型
 
+## Add More Layers in Dense Layer
+Adding more layers in dense layer could help the NN model more accurate. And this kind of layer is called "intermediate layer“.  
+Intermediate layer, same as output dense layer, has two important parameters - classes and activation method.  
+```python
+# Intermediate dense layer
+inner = keras.layers.Dense(size_inner, activation = 'relu')(vectors) 
+# Output dense layer
+outputs = keras.layers.Dense(10)(inner)
+```
+Here are some commonly used activation functions in intermediate dense layer:
+- `Sigmoid`: range [0, 1], the large negative number becomes 0 and the large positive number become 1.
+- `Tanh`: range [-1,1], similar as `sigmoid`
+- `ReLu`: range [0, inf], when x <= 0, f(x) = 0; when x > 0 , f(x) = x
+- `Leaky ReLU`: "upgraded" ReLu, but lack of consistency
+- `Maxout`: "upgraded" ReLu with expensive computing cost
+
+In output dense layer, `softmax` is the most popular method for multi-class questions.
+
+## Regularization and Dropout
+Dropout is a technique that **prevents overfitting** by randomly freeze nodes in dense layers. In other words, dropout technique forces NN model to learn data from a higher-level view and ignore outliers.
+```python
+## Inner 
+inner = keras.layers.Dense(size_inner, activation = 'relu')(vectors)
+## Dropout
+### dropout = freeze partial neuros in inner dense layer
+### drop rate determines how many neuros (%) to be frozen
+drop = keras.layers.Dropout(droprate)(inner)
+# Output
+outputs = keras.layers.Dense(10)(drop)
+```
+`droprate` determines the percentage of frozen nodes to total.
+
 ## Evaluation & Optimization in Dense Layer Recap
 ### Loss
 用于比较`actual`和`prediction`之间的差异, 来判断模型的好坏. 具体内容在前面`Dense Layer`片段有描述
@@ -255,6 +289,11 @@ data_augmentation = keras.Sequential([
 ])
 ```
 
+## Test Model
+- `keras.models.load_model(path)`: method to load saved model  
+- `model.evaluate()`: method to evaluate the performance of the model based on the   evaluation metrics
+- `model.predict()`: method to make predictions of output depending on the input
+
 # Additional Knowledge
 ## GradientTape
 `tf.GradientTape()`用于记录 forward（前向传播）过程中的所有运算，并计算出最终的总 loss。随后，它会自动执行 backward（反向传播），计算每个 parameter 对 loss 的影响程度（即梯度）。如果梯度大，说明parameter重要，如果梯度小，则说明parameter不重要。parameter的改动幅度也受learning rate的影响。
@@ -275,3 +314,9 @@ Gradient控制着参数是否需要改动，以及改动的方向（增大或减
 | Adam                   | Momentum + RMSProp      | 大多数深度学习任务       |
 | AdamW                  | Adam + 更好的 weight decay | Transformer、大模型 |
 
+## Other Neural Network
+### Recurrent Neural Network (RNN)
+循环神经网络, 专门处理序列数据(sequence data), 适用于文字翻译,语音,时间序列,股票价格,传感数据之类的场景. 不同于CNN读取数据且数据为独立个体, RNN读取的是带有明确序列顺序的数据,前面的内容会影响后悔的理解和预测.
+
+### Artifical Neural Network (ANN)
+人工神经网络,是最基础和通用的neural network
