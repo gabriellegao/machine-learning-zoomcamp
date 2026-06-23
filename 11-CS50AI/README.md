@@ -139,4 +139,23 @@ Self-attention计算的每个token之间的关联性, token value, position和to
 <center>↓</center>
 <center>Predict Token</center>
 
-参考之前Predicted Token和现在的位置信息, 在Masked Self-Attention环节中理解目前已知的上下文以及token之间的关联性.Cross-Attention是调取Encoder环节中生成的Encoded Representation寻找当前位置所需的信息.这些信息会被放入Network中用来预测下一个token.
+参考之前Predicted Token和现在的位置信息, 在Masked Self-Attention环节中理解目前已知的上下文以及token之间的关联性.Cross-Attention是调取Encoder环节中生成的Encoded Representation寻找当前位置所需的信息.这些信息会被放入Network中用来预测众多选项的probabilities并选出下一个token with the highest probability.而这些众多选项是通过上下文tokens,语法结构，语义关系以及训练学到的常见语言模式所得.
+
+## AI模型训练步骤
+Pre-training -> SFT -> RLHF
+
+### Pre-training
+知识获取阶段，海量阅读互联网文本，学习各种知识，创建base model
+
+### SFT (Supervised Fine Tuning)
+人为干预的精细训练，人类提供问题及答案，AI学习记忆回答模版，在实际应用中模仿模版回答问题。
+
+### RLHF (Reinforcement Learning with Human Feedback)
+模型自我学习，研究，探索。同时有另外一个NN模型作为奖惩机制模型，判断主模型的输出。
+
+### Tokenization
+将文本切割成一个个小的`string`,也叫做`token`,并将每个`token`转换成对应的数字ID存储。这是文本进入模型前的预处理。
+
+### Neural Network固定计算量
+Dense Layer的层数是固定的，这意味着每个`token`在模型中的计算量是恒定的。
+如果缺乏足够的上文铺垫，模型在有限的单个`token`计算中需要处理的信息量会超过固定的计算量，从而导致准确性下降。
