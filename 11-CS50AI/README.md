@@ -159,3 +159,7 @@ Pre-training -> SFT -> RLHF
 ### Neural Network固定计算量
 Dense Layer的层数是固定的，这意味着每个`token`在模型中的计算量是恒定的。
 如果缺乏足够的上文铺垫，模型在有限的单个`token`计算中需要处理的信息量会超过固定的计算量，从而导致准确性下降。
+
+### Context
+每次用户和AI之间的对话都会被存储在chat memory中，又称为`context window`.而其中的所有对话都会转换成`token`被放入模型当中，当做AI回复的上文.在新的对话开始时，模型已经经历过`pre-training`的过程。在对话进行中时，所有的对话会进入`post-training`的阶段。
+另外针对于Thinking模型，它会在`post-training`的基础上，额外加入`reinforce learning`
