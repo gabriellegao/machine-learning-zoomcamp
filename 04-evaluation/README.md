@@ -52,25 +52,33 @@ The accuracy corresponds to the sum of TN and TP divided by the total of observa
 ## Precision and Recall
 ### Precision
 **Precision** tell us the fraction of positive predictions that are correct. It takes into account only the positive class (TP and FP - second column of the confusion matrix), as is stated in the following formula:
+
 $$Precision = \cfrac{TP}{TP + FP}$$
-***以 Predicted value = Positive为底***
+
+****以 Predicted value = Positive为底***
 ### Recall
-**Recall** measures the fraction of correctly identified postive instances. It considers parts of the positive and negative classes (TP and FN - second row of confusion table). The formula of this metric is presented below:
+**Recall** measures the fraction of correctly identified postive instances. It considers parts of the positive and negative classes (TP and FN - second row of confusion table). The formula of this metric is presented below: 
+
 $$Recall = \cfrac{TP}{TP + FN}$$
-***以 Actual value = Positive为底***
+
+****以 Actual value = Positive为底***
 ### Accuracy
 $$Accuracy =\cfrac{TP + TN}{TP + TN + FP + FN}$$
 
 ## ROC Curves
 ROC Curves measure the relationship between ***False Positive Rate (FPR)*** and ***True Postive Rate (TPR)***, which are derived from the values of the confusion matrix.  
 
-**FPR** is the fraction of false positives (FP) divided by the total number of negatives (FP and TN - the first row of confusion matrix), and we want to minimize it. The formula of FPR is the following:
+**FPR** is the fraction of false positives (FP) divided by the total number of negatives (FP and TN - the first row of confusion matrix), and we want to minimize it. The formula of FPR is the following:  
+
 $$FPR = \cfrac{FP}{(TN + FP)}$$
-***以 Actual value =  Negative为底, 数值越小越好***  
+
+****以 Actual value =  Negative为底, 数值越小越好***  
 
 ***TPR*** or ***Recall*** is the fraction of true positives (TP) divided by the total number of positives (FN and TP - second row of confusion table), and we want to maximize this metric. The formula of this measure is presented below:
+
 $$TPR = \cfrac{TP}{(FN + TP)}$$
-***以 Actual value = Positive为底, 数值越大越好***
+
+****以 Actual value = Positive为底, 数值越大越好***
 
 ***Model的curve越靠近ideal的curve越好, 越远离random的curve越好***
 
